@@ -3,7 +3,16 @@ import numpy as np
 import jax.numpy as jnp
 from jax import random
 import jax
+"""
+NeuralDMD DataLoader for loading precomputed data from npy files.
+The npy files should contain the following arrays:
+  - As.npy: A matrix for each time frame (shape: (T, max_vis, num_samples)), which translates the image space to visibility space.
+  - targets.npy: Target visibilities for each time frame (shape: (T, max_vis)), which are the true visibilities.
+  - sigmas.npy: Noise standard deviation for each visibility (shape: (T, max_vis)), which is the error budget in the measurements.
+  - masks.npy: Mask for each visibility (shape: (T, max_vis)), which indicates whether the visibility is valid or not as the original A matrices were not of the same size and they have been padded.
+  - num_vis_list.npy: Number of visibilities for each time frame (shape: (T,)), which is used to mask out the padded visibilities.
 
+"""
 class DMDDataLoader:
     def __init__(self, 
                  data,         # Image cube: shape (num_frames, H, W) [can be numpy or JAX array]

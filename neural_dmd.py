@@ -187,10 +187,15 @@ def loss_fn(model, xy, frame_batch, target_vis_batch, num_vis_batch, A_batch, si
     Args:
       model: NeuralDMD instance.
       xy: Coordinates for each pixel, shape (B, 2)
+      frame_bacht: Intensity values for each pixel over time, shape (B, T),
       target_values: Ground truth signal for each pixel over time, shape (B, T)
-      time_indices: Array of time points, shape (T,)
-      beta: Hyperparameter
-    
+      num_vis_batch: Number of visibilities for each pixel, shape (B,),
+      A_batch: Visibility matrix, shape (B, max_vis, T),
+      sigma_batch: Noise level for each visibility, shape (B, max_vis),
+      time_indices: Array of time points, shape (T,),
+      mask_batch: Mask for each pixel, shape (B, max_vis),
+      beta: Hyperparameter, emphasis on orthogonality loss.
+      frame_max, frame_min: maximum and minimum values of all the frames, included for debugging purposes. 
     Returns:
       total_loss, (reconstruction_loss, orthogonality_loss)
     """
@@ -243,10 +248,13 @@ def train_step(model, opt_state, xy, frame_batch, target_vis_batch, num_vis_batc
 @eqx.filter_jit
 def train_epoch_jit(model, opt_state, batch_list, optimizer, beta, key, frame_max, frame_min):
     """
-    xy_array: (num_batches, batch_size, 2)
-    pix_array: (num_batches, batch_size, T)
-    time_idx_array: (T,) - same for all batches.
+    model: NeuralDMD instance.
+    opt_state: Optimizer state.
+    batch_list: List of batches, each containing frame_batch, pixel_coords, As_batch, targets_batch, sigmas_batch, mask_batch, time_batch, num_vis_batch.
+    optimizer: optax optimizer.
+    beta: Orthogonality loss weight.
     key: PRNG key.
+    frame_max, frame_min: maximum and minimum values of all the frames, included for debugging purposes.
     """
     frame_batches, pixel_coords, As_batches, targets_batches, sigmas_batches, mask_batches, time_batches, num_vis_batches = batch_list
     def scan_fn(carry, batch_idx):
@@ -292,6 +300,9 @@ def plot_losses(rec_losses, ortho_losses, total_losses, output_dir):
     plt.savefig(os.path.join(output_dir, "losses.png"))
     plt.close()
 
+# -------------------------
+# Debugging Functions
+# -------------------------
 def print_grad_stats(name, grad):
     norm = np.linalg.norm(grad)
     grad_min = np.min(grad)
@@ -335,6 +346,7 @@ def print_all_gradients(grads, model):
             grad_module = grads.temporal_b.mlp[i]
             print_grad_stats(f"Temporal B layer {i} weight", grad_module.weight)
             print_grad_stats(f"Temporal B layer {i} bias", grad_module.bias)
+# -------------------------
 
 def train_model(model, train_loader, num_epochs, key, beta, data_dir, initial_lr, plots_dir, frame_max, frame_min):
     os.makedirs(plots_dir, exist_ok=True)
@@ -349,6 +361,7 @@ def train_model(model, train_loader, num_epochs, key, beta, data_dir, initial_lr
     
     checkpoints_dir = "../checkpoints"
     os.makedirs(checkpoints_dir, exist_ok=True)
+    # Training Loop
     with tqdm(total=num_epochs) as pbar:
         for epoch in range(num_epochs):
             epoch_data = train_loader.get_epoch_data(epoch)
