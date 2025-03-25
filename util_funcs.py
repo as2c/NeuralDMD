@@ -107,6 +107,7 @@ def load_hdf5(dir, file):
         times = f["times"][:]
     return frames, times
 
+# used for orthogonalizing the modes
 def gram_schmidt(W):
     N, r = W.shape
     W_orth = jnp.zeros_like(W, dtype=W.dtype)
@@ -126,6 +127,7 @@ def calc_psnr(frame1, frame2, max_pixel_value=1.0):
     psnr = 10 * jnp.log10((max_pixel_value**2)/mse)
     return psnr
 
+# used for converting pixel coordinates to physical coordinates
 def pixel_to_physical(x_grid, y_grid, width, height, pixel_size_x, pixel_size_y):
     theta_x = (x_grid - width/2) * pixel_size_x
     theta_y = (y_grid - height/2) * pixel_size_y
