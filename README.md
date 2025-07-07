@@ -33,12 +33,14 @@ pip install "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax
 
 Repository layout
 
+```
 neuraldmd/
  ├─ neural_dmd/           # core library
  ├─ tutorial/
  │   ├─ pixel/            # sparse‑pixel experiment (Apr 1–7 2025 weather data)
  │   └─ fourier/          # sparse‑visibility experiment (orbiting hotspot)
  └─ requirements.txt
+```
 
 Quick start
 
@@ -46,7 +48,7 @@ Pixel‑domain example
 ----------------------
 ```
 cd tutorial/pixel
-python train_model.py    # train on 5 % random pixels
+python train_model.py    # train on 10 % random pixels
 after training:
 python test_model.py     # plot modes/spectrum and save GIF/MP4
 ```
