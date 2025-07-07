@@ -36,26 +36,28 @@ Repository layout
 neuraldmd/
  ├─ neural_dmd/           # core library
  ├─ tutorial/
- │   ├─ pixel/            # sparse‑pixel experiment (Apr 1–7 2025 data)
+ │   ├─ pixel/            # sparse‑pixel experiment (Apr 1–7 2025 weather data)
  │   └─ fourier/          # sparse‑visibility experiment (orbiting hotspot)
- ├─ docs/                 # figures, GIFs, LaTeX assets
  └─ requirements.txt
 
 Quick start
 
 Pixel‑domain example
-
+----------------------
+```
 cd tutorial/pixel
 python train_model.py    # train on 5 % random pixels
 after training:
 python test_model.py     # plot modes/spectrum and save GIF/MP4
+```
 
 Fourier‑domain example
-
+----------------------
+```
 cd tutorial/fourier
 python train_model.py    # train on synthetic visibilities
-
-Open test_model.ipynb in Jupyter to visualise the results.
+```
+Open "test_model.ipynb" in Jupyter to visualise the results.
 
 Both workflows write a checkpoint (*.eqx) and an outputs/ folder containing plots, videos, and NumPy arrays.
 
