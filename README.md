@@ -14,3 +14,18 @@ This repository, we have included the following experiments:
 - "/tutorial/Fourier/test_model.ipynb" visualizes the modes and spectrum learned by the model, and saves a gif of the video represented by these modes and spectrum.
 
 All the code for NeuralDMD, Fourier or pixle domain, are contained within the "./tutorial" directory. 
+
+--------------------------------------------------------------------------------------------------------------
+Installation
+--------------------------------------------------------------------------------------------------------------
+After cloning this repository, create a virtual environment and install requirements:
+```
+python -m venv .neuraldmd_env
+. .neuraldmd_env/bin/activate
+pip install -r requirements.txt
+```
+
+For jax, you might need to install the cuda version via the following:
+```
+pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+```
