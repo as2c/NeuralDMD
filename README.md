@@ -1,38 +1,95 @@
-# NeuralDMD
-NeuralDMD for Imaging from Sparse Observations
--------------------------------------------------------
-NeuralDMD combines neural implicit fields with dynamic mode decomposition to learn linear dynamical representations capable of reconstructing spatiotemporal images from sparse pixel or Fourier observations.
+NeuralDMD
 
---------------------------------------------------------------------------------------------------------------
+NeuralDMD fuses classic dynamic mode decomposition (DMD) with neural implicit fields to reconstruct full‑resolution spatiotemporal data from sparse pixel samples or incomplete Fourier (visibility) measurements.
+
+Key features
+
+Reconstruct images, videos, or volumes from highly undersampled measurements (< 5 % pixels or sparse visibilities)
+
+Provide interpretable spatial modes (Φ) and temporal spectra (Λ)
+
+Train on CPU, GPU, or TPU through JAX (CUDA 11.8+ supported)
+
+Modular, research‑friendly codebase written in pure Python
+
+Requirements
+
+Package
+
+Tested version
+
+Python
+
+3.10 / 3.11
+
+JAX
+
+0.4.28
+
+Equinox
+
+0.11
+
+Optax
+
+0.1.8
+
+Matplotlib
+
+3.9
+
+See requirements.txt for the full list.
+
 Installation
---------------------------------------------------------------------------------------------------------------
-After cloning this repository, create a virtual environment and install requirements:
-```
-python -m venv .neuraldmd_env
-. .neuraldmd_env/bin/activate
+
+# clone
+git clone https://github.com/<YOUR‑ORG>/neuraldmd.git
+cd neuraldmd
+
+# (optional) virtual environment
+python -m venv .venv
+source .venv/bin/activate              # Windows: .venv\Scripts\activate
+
+# core dependencies
 pip install -r requirements.txt
-```
 
-For jax, you might need to install the cuda version via the following:
-```
-pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-```
+# GPU acceleration (replace cuda12_pip with cuda11_pip if needed)
+pip install "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
---------------------------------------------------------------------------------------------------------------
-Getting Started
---------------------------------------------------------------------------------------------------------------
-This repository, we have included the following experiments:
-1. Sparse Observations in the Pixel Domain
-2. Sparse Observations in the Fourier Domain
+Repository layout
 
-1. Pixel Domain: We use April 1-7, 2025 and fit a NeuralDMD. The data available as "./tutorial/pixel/data/data_stream-oper_stepType-instant.nc."
-- "/tutorial/pixel/train_model.py" fits a NeuralDMD to sparse pixel observations. After training, the model is saved under "/tutorial/Image/pixel/trained_model.eqx".
-- "/tutorial/pixel/test_model.py" visualizes the modes and spectrum learned by the model, and saves a gif of the video reconstructed by these modes and spectrum, and saves the reconstruction data.
+neuraldmd/
+ ├─ neural_dmd/           # core library
+ ├─ tutorial/
+ │   ├─ pixel/            # sparse‑pixel experiment (Apr 1–7 2025 data)
+ │   └─ fourier/          # sparse‑visibility experiment (orbiting hotspot)
+ ├─ docs/                 # figures, GIFs, LaTeX assets
+ └─ requirements.txt
 
-2. Fourier Domain: As a simple case, here we use an orbital hotspot for this experiment (/tutorial/generate_data.ipynb creates the orbiting hotspot data with the ngEHT coverage).
-- "/tutorial/Fourier/train_model.py" fits a NeuralDMD to sparse Fourier observations. After training, the model is saved under "/tutorial/Fourier/models/trained_model.eqx".
-- "/tutorial/Fourier/test_model.ipynb" visualizes the modes and spectrum learned by the model, and saves a gif of the video represented by these modes and spectrum.
+Quick start
 
-All the code for NeuralDMD, Fourier or pixle domain, are contained within the "./tutorial" directory. 
+Pixel‑domain example
 
-@ Ali SaraerToosi, University of Toronto, 2025
+cd tutorial/pixel
+python train_model.py    # train on 5 % random pixels
+after training:
+python test_model.py     # plot modes/spectrum and save GIF/MP4
+
+Fourier‑domain example
+
+cd tutorial/fourier
+python train_model.py    # train on synthetic visibilities
+
+Open test_model.ipynb in Jupyter to visualise the results.
+
+Both workflows write a checkpoint (*.eqx) and an outputs/ folder containing plots, videos, and NumPy arrays.
+
+Custom data workflow
+
+Convert your sequence (images or visibilities) to NumPy .npy or NetCDF.
+
+Place it under tutorial/<new_expt>/data/.
+
+Adjust parameters in train_model.py (rank, learning rate, mask).
+
+Run the training and testing scripts as above.
