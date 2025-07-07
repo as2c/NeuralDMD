@@ -1,6 +1,7 @@
 # NeuralDMD
 NeuralDMD for Imaging from Sparse Observations
-
+-------------------------------------------------------
+NeuralDMD combines neural implicit fields with dynamic mode decomposition to learn linear dynamical representations capable of reconstructing spatiotemporal images from sparse pixel or Fourier observations.
 
 --------------------------------------------------------------------------------------------------------------
 Installation
