@@ -1,48 +1,22 @@
-NeuralDMD
+# NeuralDMD
 
 NeuralDMD fuses classic dynamic mode decomposition (DMD) with neural implicit fields to reconstruct full‑resolution spatiotemporal data from sparse pixel samples or incomplete Fourier (visibility) measurements.
 
 Key features
+----------------------
+- Reconstruct images, videos, or volumes from highly undersampled measurements (< 1 % pixels or sparse visibilities)
 
-Reconstruct images, videos, or volumes from highly undersampled measurements (< 5 % pixels or sparse visibilities)
+- Provide interpretable spatial modes and temporal spectrum.
 
-Provide interpretable spatial modes (Φ) and temporal spectra (Λ)
-
-Train on CPU, GPU, or TPU through JAX (CUDA 11.8+ supported)
-
-Modular, research‑friendly codebase written in pure Python
+- Train on CPU or GPU through JAX (CUDA 11.8+ supported)
 
 Requirements
-
-Package
-
-Tested version
-
-Python
-
-3.10 / 3.11
-
-JAX
-
-0.4.28
-
-Equinox
-
-0.11
-
-Optax
-
-0.1.8
-
-Matplotlib
-
-3.9
-
+----------------------
 See requirements.txt for the full list.
 
 Installation
 
-# clone
+```# clone
 git clone https://github.com/<YOUR‑ORG>/neuraldmd.git
 cd neuraldmd
 
@@ -54,7 +28,7 @@ source .venv/bin/activate              # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
 # GPU acceleration (replace cuda12_pip with cuda11_pip if needed)
-pip install "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+pip install "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html```
 
 Repository layout
 
