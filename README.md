@@ -62,7 +62,9 @@ python train_model.py    # train on synthetic visibilities
 Open "test_model.ipynb" in Jupyter to visualise the results.
 
 Both workflows write a checkpoint (*.eqx) and an outputs/ folder containing plots, videos, and NumPy arrays.
+
 Custom data workflow
+----------------------
 Convert your sequence (images or visibilities) to NumPy .npy or NetCDF.
 Place it under tutorial/<new_expt>/data/.
 Adjust parameters in train_model.py (rank, learning rate, mask).
