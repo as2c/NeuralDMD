@@ -17,18 +17,19 @@ See requirements.txt for the full list.
 Installation
 
 ```# clone
-git clone https://github.com/<YOUR‑ORG>/neuraldmd.git
-cd neuraldmd
+git clone git@github.com:as2c/NeuralDMD.git
+cd NeuralDMD
 
 # (optional) virtual environment
-python -m venv .venv
-source .venv/bin/activate              # Windows: .venv\Scripts\activate
+python -m venv .neuraldmd_env
+source .neuraldmd_env/bin/activate              # Windows: .venv\Scripts\activate
 
 # core dependencies
 pip install -r requirements.txt
 
 # GPU acceleration (replace cuda12_pip with cuda11_pip if needed)
-pip install "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html```
+pip install "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+```
 
 Repository layout
 
