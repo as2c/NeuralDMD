@@ -28,7 +28,7 @@ source .neuraldmd_env/bin/activate              # Windows: .venv\Scripts\activat
 pip install -r requirements.txt
 
 # GPU acceleration (replace cuda12_pip with cuda11_pip if needed)
-pip install "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+pip install --upgrade "jax[cuda12]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 ```
 
 Repository layout

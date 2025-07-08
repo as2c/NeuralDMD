@@ -1,0 +1,15 @@
+[build-system]
+requires      = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name    = "neuraldmd"
+version = "0.1.0"
+dependencies = [
+    "jax>=0.4.28",
+    "equinox>=0.11",
+    "optax>=0.1.8"
+]
+
+[tool.setuptools]
+packages = ["neuraldmd"]        # ← only install this directory
