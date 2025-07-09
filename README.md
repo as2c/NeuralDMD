@@ -22,13 +22,16 @@ cd NeuralDMD
 
 # (optional) virtual environment
 python -m venv .neuraldmd_env
-source .neuraldmd_env/bin/activate              # Windows: .venv\Scripts\activate
+source .neuraldmd_env/bin/activate
+
+# GPU acceleration (replace cuda12_pip with cuda11_pip if needed)
+pip install --upgrade "jax[cuda12]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 # core dependencies
 pip install -r requirements.txt
 
-# GPU acceleration (replace cuda12_pip with cuda11_pip if needed)
-pip install --upgrade "jax[cuda12]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+# install NeuralDMD
+pip install -e .
 ```
 
 Repository layout
@@ -37,8 +40,8 @@ Repository layout
 neuraldmd/
  ├─ neural_dmd/           # core library
  ├─ tutorial/
- │   ├─ pixel/            # sparse‑pixel experiment (Apr 1–7 2025 weather data)
- │   └─ fourier/          # sparse‑visibility experiment (orbiting hotspot)
+ │   ├─ weather_data_assimilation/            # sparse‑pixel experiment (Apr 1–7 2025 weather data)
+ │   └─ black_hole_imaging/                   # sparse‑visibility experiment (orbiting hotspot)
  └─ requirements.txt
 ```
 
@@ -47,7 +50,7 @@ Quick start
 Pixel‑domain example
 ----------------------
 ```
-cd tutorial/pixel
+cd tutorial/weather_data_assimilation
 python train_model.py    # train on 10 % random pixels
 after training:
 python test_model.py     # plot modes/spectrum and save GIF/MP4
@@ -56,7 +59,8 @@ python test_model.py     # plot modes/spectrum and save GIF/MP4
 Fourier‑domain example
 ----------------------
 ```
-cd tutorial/fourier
+cd tutorial/black_hole_imaging
+# To generate data, first run all the code in generate_data.ipynb, proceed with next steps only after running this code.
 python train_model.py    # train on synthetic visibilities
 ```
 Open "test_model.ipynb" in Jupyter to visualise the results.
