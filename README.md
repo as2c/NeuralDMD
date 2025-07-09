@@ -45,7 +45,7 @@ neuraldmd/
  └─ requirements.txt
 ```
 
-Quick start
+# Quick start
 
 Pixel‑domain example
 ----------------------
