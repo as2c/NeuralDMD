@@ -12,7 +12,7 @@ Key features
 
 Requirements
 ----------------------
-See requirements.txt for the full list.
+See requirements.txt for the full list -- Compatible with Python 3.12 and below.
 
 Installation
 

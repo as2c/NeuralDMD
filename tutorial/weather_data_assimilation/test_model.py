@@ -344,6 +344,7 @@ if __name__ == '__main__':
         canvas = fig.canvas; canvas.draw()
         w,h = canvas.get_width_height()
         buf = np.frombuffer(canvas.tostring_argb(), dtype=np.uint8).reshape(h,w,4)
+        print(w, h)
         gt_frames.append(buf[:,:,1:4])
         if t % 10 == 0:
             plt.savefig(os.path.join(out_dir,f"gt_{t}.png"),
