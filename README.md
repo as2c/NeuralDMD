@@ -46,7 +46,6 @@ neuraldmd/
 ```
 
 # Quick start
-
 Pixel‑domain example
 ----------------------
 ```

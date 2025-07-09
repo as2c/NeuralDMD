@@ -10,3 +10,4 @@ xarray
 scikit-image
 equinox
 netCDF4
+ngehtsim
