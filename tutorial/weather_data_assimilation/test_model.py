@@ -235,7 +235,7 @@ def plot_unit_circle(Omega_full, file_path):
 # -----------------------------------------------------------------------------
 if __name__ == '__main__':
     nc_file    = "./data/data_stream-oper_stepType-instant.nc"
-    model_file = "./data/trained_model.eqx"
+    model_file = "./models/trained_model.eqx"
     out_dir    = "./plots"
     os.makedirs(out_dir, exist_ok=True)
 
