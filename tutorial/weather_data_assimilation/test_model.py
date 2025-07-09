@@ -234,8 +234,8 @@ def plot_unit_circle(Omega_full, file_path):
 # main
 # -----------------------------------------------------------------------------
 if __name__ == '__main__':
-    nc_file    = "/home/as2c/gfs_data/20250401_07/uv_weather/data_stream-oper_stepType-instant.nc"
-    model_file = "/home/as2c/iccv_paper/weather/neural_dmd/data/trained_model.eqx"
+    nc_file    = "./data/data_stream-oper_stepType-instant.nc"
+    model_file = "./data/trained_model.eqx"
     out_dir    = "./plots"
     os.makedirs(out_dir, exist_ok=True)
 
