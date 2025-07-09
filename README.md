@@ -17,7 +17,7 @@ See requirements.txt for the full list.
 Installation
 
 ```# clone
-git clone git@github.com:as2c/NeuralDMD.git
+git clone https://github.com/as2c/NeuralDMD.git
 cd NeuralDMD
 
 # (optional) virtual environment
